@@ -2,7 +2,7 @@
 	$host = "localhost";
 	$username = "root";
 	$password = "";
-	$dbname = "cnss";
+	$dbname = "cnss2";
 
 	if(!$con = mysqli_connect($host,$username,$password,$dbname))
 		echo mysqli_connect_error();

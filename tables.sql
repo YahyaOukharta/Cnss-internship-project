@@ -20,7 +20,7 @@ create table Det_fichier(
 						);
 
 ALTER TABLE Det_fichier ADD FOREIGN KEY (id_fichier) REFERENCES Fichier(id);   /* Clés etrangeres*/
-ALTER TABLE Det_fichier ADD FOREIGN KEY (code_rejet) REFERENCES Motif_rejet(id);
+-- ALTER TABLE Det_fichier ADD FOREIGN KEY (code_rejet) REFERENCES Motif_rejet(id);
 
 create table Caisse_etrangere(
 								id int primary key AUTO_INCREMENT,
@@ -35,7 +35,7 @@ create table Assure(
 						prenom varchar(50)
 					);
 
-/* Population de la table des motifs de rejets */
+/* Population de la table des motifs de rejets,assurés et caisses etrangeres */
 
 INSERT INTO `Motif_rejet` (`id`, `motif`) 
 					VALUES  ('1', 'Assuré invalide'),
@@ -45,3 +45,23 @@ INSERT INTO `Motif_rejet` (`id`, `motif`)
 					    	('5', 'Caisse étrangere incorrecte'),
 					 	    ('6', 'Facture inexistante'),
 					 		('7', 'Annee apurement invalide ');
+
+
+
+INSERT INTO `Assure` (`immatriculation`, `nom`, `prenom`) 
+					VALUES 	(104852811, 'CORBATON', 'PIERRE'),
+							(106432215, 'RUIZ', 'MARGARITA'),
+							(112916112, 'ELBAZ', 'LEON'),
+							(115688817, 'LOPEZ', 'FRANCISCO'),
+							(136510312, 'ABBADI', 'SAADIA'),
+							(186048222, 'LOUDGHIRI', 'YOUSSEF');
+
+
+
+INSERT INTO `Caisse_etrangere` (`id`, `nom`, `ville`, `pays`, `type_remboursement`) 
+					VALUES	(1, 'INSS DE LIEIDA', 'Lieida', 'Espagne', 'FO'),
+							(2, 'INSS DE MALAGA', 'Malaga', 'Espagne', 'FO'),
+							(3, 'INSS DE BARCELONA', 'Barcelona', 'Espagne', 'FO'),
+							(4, 'INSS  DE CEUTA', 'Ceuta', 'Espagne', 'FO');
+
+--

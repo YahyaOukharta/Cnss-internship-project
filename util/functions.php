@@ -33,4 +33,11 @@
 	function parse_csv_line($line,$delimiter){
 		return explode($delimiter, $line);
 	}
+
+	function filter_line($line,$filters){ //2 : imma  7 : caisse etrangere
+			if(empty($filters['imma']) || $line[2] == $filters['imma'])
+				if(empty($filters['caisse']) || $line[7] == $filters['caisse'])
+					return true;		
+			return false;
+	}
 ?>

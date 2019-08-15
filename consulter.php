@@ -11,8 +11,9 @@
 	<title>Consulter les fichiers</title>
 </head>
 <body>
+<div class="file_list" style="width:30%;float:left;">
 <h1>Consulter les fichiers</h1>
-<div>
+
 	<ul>
 		<?php 
 		if($files = get_all_files($con))
@@ -22,8 +23,28 @@
 			}
 		?>
 	</ul>
+</div>
+
+<div class="search" style="width:70%;height:140px;border: 1px solid black;margin-left: 30%;margin-top: 20px;">
+	<h4>Recherche par critere</h4>
+	<?php //include("util/search.php") ?>
+<form method="GET" action="<?php echo $_SERVER["PHP_SELF"]; ?>">
+	<label>Immatriculation</label>
+	<input type="text" name="imma">
+	<label>Caisse etrangere</label>
+	<select name="caisse">
+		<option></option>
+		<option>INSS DE LIEIDA</option>
+		<option>INSS DE MALAGA</option>
+		<option>INSS DE BARCELONA</option>
+	</select>
+	<button type="submit" value="<?php echo (isset($_GET['id'])?$_GET['id']:"") ?>" name="<?php echo (isset($_GET['id'])?"id":"") ?>">Rechercher</button>
+</form>
+</div>
+
 	<?php if(isset($_GET['id'])){  
 		$lines = get_file_lines($con, $_GET['id']);
+		//print_r(filter_lines($lines, $_GET));
 		if(!isset($_GET['ano'])){
 	?>
 
@@ -44,12 +65,14 @@
 				$i=0;
 				foreach ($lines as $line) {
 					if($i > 0){
-						echo "<tr>";
-							$parsed_line = parse_csv_line($lines[$i]['contenu_ligne'],";");
-							echo "<th>".$i."</th>";
-							foreach ($parsed_line as $td)
-								echo "<td>".$td."</td>";
-						echo "</tr>";
+						$parsed_line = parse_csv_line($lines[$i]['contenu_ligne'],";");
+						if(filter_line($parsed_line, $_GET)){ // filtering using the get requests
+							echo "<tr>";
+								echo "<th>".$i."</th>";
+								foreach ($parsed_line as $td)
+									echo "<td>".$td."</td>";
+							echo "</tr>";
+						}
 					}
 					$i++;
 				}
