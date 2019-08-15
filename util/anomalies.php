@@ -103,7 +103,6 @@
 	function code_rejet_to_motifs($con,$code)
 	{
 		$motifs= array();
-
 		for($i = 0;$i < strlen($code); $i++) {
 			array_push($motifs,select_data($con, "Motif_rejet", ["motif"], "id = {$code[$i]}")[0]["motif"]);
 		}

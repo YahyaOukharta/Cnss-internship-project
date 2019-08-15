@@ -25,12 +25,14 @@
 	</ul>
 </div>
 
-<div class="search" style="width:70%;height:140px;border: 1px solid black;margin-left: 30%;margin-top: 20px;">
+<div class="search" style="width:70%;height:150px;border: 1px solid black;margin-left: 30%;margin-top: 20px;">
 	<h4>Recherche par critere</h4>
 	<?php //include("util/search.php") ?>
 <form method="GET" action="<?php echo $_SERVER["PHP_SELF"]; ?>">
 	<label>Immatriculation</label>
 	<input type="text" name="imma">
+	<label>Nombre de forfaits de la caisse</label>
+	<input type="text" name="nforfait"><br><br>
 	<label>Caisse etrangere</label>
 	<select name="caisse">
 		<option></option>
