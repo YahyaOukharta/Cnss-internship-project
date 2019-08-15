@@ -16,9 +16,10 @@
 	<ul>
 		<?php 
 		if($files = get_all_files($con))
-			foreach ($files as $file) 
+			foreach ($files as $file) {
 				$etat = ($file['code_etat']==2?"non verifié":($file['code_etat']==1?"incorrect":"correct"));
 				echo "<li>"."<a href='?id=".$file['id']."'>".$file['nom']."</a>  ".$etat."</li>"; // ajouter code_etat
+			}
 		?>
 	</ul>
 	<?php if(isset($_GET['id'])){  
