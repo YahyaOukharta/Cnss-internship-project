@@ -17,7 +17,8 @@
 		<?php 
 		if($files = get_all_files($con))
 			foreach ($files as $file) 
-				echo "<li>"."<a href='?id=".$file['id']."'>".$file['nom']."</a>"."</li>"; // ajouter code_etat
+				$etat = ($file['code_etat']==2?"non verifié":($file['code_etat']==1?"incorrect":"correct"));
+				echo "<li>"."<a href='?id=".$file['id']."'>".$file['nom']."</a>  ".$etat."</li>"; // ajouter code_etat
 		?>
 	</ul>
 	<?php if(isset($_GET['id'])){  
@@ -55,10 +56,36 @@
 			</tbody>
 		</table>
 	<?php 
-		}else{	
+		}
+		else{	
 			echo "<p><a href='?id=".$_GET['id']."'>Details du fichier</a> / / / Anomalies du fichier</p>";
-			check_anomalies($con,$lines);
-			}
+
+			$code_etat = select_data($con, "Fichier", ["code_etat"], "id = {$_GET['id']}")[0]['code_etat'];
+			if($code_etat == '2')
+				check_anomalies($con,$lines,$_GET['id']);
+	?>
+		<table>
+			<thead>
+				<th>Num. ligne</th>
+				<th>Anomalies</th>
+			</thead>
+			<tbody>
+			<?php 
+				$i=0;
+				foreach ($lines as $line) {
+					if($i > 0){
+						echo "<tr>";
+						echo "<th>".$i."</th>";
+						echo "<td>".code_rejet_to_motifs($con, $line['code_rejet'])."</td>";
+						echo "</tr>";
+					}
+					$i++;
+				}
+			?>
+			</tbody>
+		</table>
+	<?php
+		}
 	}
 	?>
 </div>

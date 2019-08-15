@@ -16,7 +16,7 @@
 		$fields = implode(',',$fields);
 		
 		$sql = "SELECT $fields FROM $table WHERE $conditions;";
-		echo $sql."<br><br>";
+		//echo $sql."<br><br>";
 		if(!$result = mysqli_query($con,$sql))
 			echo mysqli_error($con);
 		else 
@@ -28,6 +28,16 @@
 			else 
 				return false;
 	}
+
+	function update_data($con,$table,$field,$value,$conditions){ // 1 field A value
+		
+		$sql = "UPDATE $table SET $field = $value WHERE $conditions;";
+		//echo $sql."<br><br>";
+		if(!mysqli_query($con,$sql))
+			echo mysqli_error($con);
+		else 	
+			return true; // data inserted
+	}	
 
 	function store_csv_array($con,$fname,$data)
 	{
