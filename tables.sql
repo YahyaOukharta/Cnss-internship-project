@@ -3,6 +3,7 @@ create table Fichier(
 						nom varchar(27) NOT NULL,
 						date_creation date NOT NULL,
 						date_modification date NOT NULL,
+						nbr_lignes int NOT NULL,
 						code_etat int default 2  /* 0 = correct, 1 = incorrect, 2 = non verifié */
 					);
 

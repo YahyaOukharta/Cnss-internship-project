@@ -51,6 +51,7 @@
 					return false;
 			$i++;
 		}		
+		return true;
 	}
 
 	function get_all_files($con){
@@ -58,6 +59,6 @@
 	}
 
 	function get_file_lines($con,$file_id){
-		return select_data($con, "Det_fichier", ["*"], "id_fichier ='".$file_id."' LIMIT 15"); // limit 
+		return select_data($con, "Det_fichier", ["*"], "id_fichier ='".$file_id."'");// LIMIT 15"); // limit 
 	}
 ?>

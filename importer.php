@@ -11,6 +11,23 @@
 		<br>
 		<h3>Importer un fichier .csv</h1>
 		<br>
+		<?php 
+			if(isset($_GET['success']))
+				echo "<div class='alert alert-success'>Fichier importé avec succès</div>";
+			else if(isset($_GET['error'])){
+				$errcode = $_GET['error'];
+				$errmsg = "";
+				if($errcode == '1')
+					$errmsg = "Veuillez importer un fichier .csv";
+				else if($errcode == '2')
+					$errmsg = "Veuillez importer un fichier avec un nom formatté correctement";
+				else if($errcode == '3')
+					$errmsg = "Error de stockage des lignes";
+				else if($errcode == '4')
+					$errmsg = "Fichier existe deja";
+				echo "<div class='alert alert-danger'>".$errmsg."</div>";
+			}
+		?>
 		<form method="POST" action="util/uploadcsv.php" enctype="multipart/form-data">
 			<input type="file" name="uploadedFile">
 			<input type="submit" name="upload" value="Importer">

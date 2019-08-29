@@ -41,4 +41,13 @@
 						return true;		
 			return false;
 	}
+	function filter_file($file,$filters){ //2 : imma  7 : caisse etrangere
+			//print_r($file);
+			$file_arr = explode("_",explode('.',$file['nom'])[0]);
+			//print_r($file_arr);
+			 if(empty($filters['motif']) || ($file_arr[0] == 'FO' && $filters['motif'] == "Forfait"))
+				if(empty($filters['caisse']) || ($file_arr[1] == 'INSS' && $filters['caisse'] == "INSS"))
+			 			return true;		
+			 return false;
+	}
 ?>
